@@ -1,129 +1,20 @@
+{% extends "template_base.tex" %}
 
+{% block header %}
 % Класс документа, кегль по умолчанию, две колонки текста
 \documentclass[12pt,twocolumn]{article}
+{% endblock %}
 
-% Условия
-\usepackage{ifthen}
-
-% Поля, размер и ориентация страницы
-\usepackage[a4paper,landscape,top=2.5cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
-
-% Пакет дополнительных возможностей
-\usepackage{xltxtra}
-
-% Поддержка различных языков
-\usepackage{polyglossia}
-
-% Выбор основного шрифта
-\setmainfont{Times New Roman}
-
-% Шрифт для кириллицы
-\newfontfamily\cyrillicfont[Mapping=tex-text,Script=Cyrillic]{Times New Roman}
-
-% Основной язык текста
-\setdefaultlanguage{russian}
-
-% Интервал между колонками
-\setlength{\columnsep}{2cm}
-
-% Полуторный интервал
-\linespread{1.25}
-
-% Не останавливать компиляцию
-\scrollmode
-
-% Без номеров страниц
-\pagestyle{empty}
-
-% Шаблон шапки билета
-\newcommand{\bilet}[1]{
-  \newpage
-  \begin{flushleft}
-    \begin{small}
-      СЕВЕРО-ВОСТОЧНЫЙ ФЕДЕРАЛЬНЫЙ УНИВЕРСИТЕТ\\
-      ИНСТИТУТ МАТЕМАТИКИ И ИНФОРМАТИКИ \\
-      КАФЕДРА ИНФОРМАЦИОННЫХ ТЕХНОЛОГИЙ \\
-      Дисциплина: Современные офисные технологии \\
-      Группа: ИТ-07
-    \end{small}
-  \end{flushleft}
-
-  \begin{flushright}
-    <<УТВЕРЖДАЮ>> \\
-    Зав.кафедрой \\
-    \underline{\hspace{3cm}} \\
-    Мордовской С.Д. \\
-  \end{flushright}
-
-  \begin{center}
-    БИЛЕТ № #1
-  \end{center}
-}
-
-% Загрузка вопросов
-\input{main}
-
-% Начало документа
+{% block document %}
 \begin{document}
 
-\bilet{1}
+{% for i in range(5) %}
+\bilet{ {{ i }} }
 \begin{enumerate}
-\item \vopros{4}
-\item \vopros{8}
+\item {{ data.questions[0] }}
+\item {{ data.questions[1] }}
 \end{enumerate}
-
-\bilet{2}
-\begin{enumerate}
-\item \vopros{3}
-\item \vopros{6}
-\end{enumerate}
-
-\bilet{3}
-\begin{enumerate}
-\item \vopros{3}
-\item \vopros{1}
-\end{enumerate}
-
-\bilet{4}
-\begin{enumerate}
-\item \vopros{7}
-\item \vopros{4}
-\end{enumerate}
-
-\bilet{5}
-\begin{enumerate}
-\item \vopros{10}
-\item \vopros{9}
-\end{enumerate}
-
-\bilet{6}
-\begin{enumerate}
-\item \vopros{10}
-\item \vopros{5}
-\end{enumerate}
-
-\bilet{7}
-\begin{enumerate}
-\item \vopros{9}
-\item \vopros{4}
-\end{enumerate}
-
-\bilet{8}
-\begin{enumerate}
-\item \vopros{3}
-\item \vopros{1}
-\end{enumerate}
-
-\bilet{9}
-\begin{enumerate}
-\item \vopros{5}
-\item \vopros{10}
-\end{enumerate}
-
-\bilet{10}
-\begin{enumerate}
-\item \vopros{2}
-\item \vopros{8}
-\end{enumerate}
+{% endfor %}
 
 \end{document}
+{% endblock %}

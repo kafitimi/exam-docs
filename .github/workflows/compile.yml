@@ -1,9 +1,20 @@
 name: Compile exam documents
 on: [push]
 jobs:
-  compile:
-    name: Compilation
+  Compilation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: pip install -r requirements
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - run: pip install -r requirements.txt
+    - run: python main.py
+    - uses: xu-cheng/latex-action@v2
+      with:
+        root_file: |
+          assignments.tex
+          program.tex
+        latexmk_use_xelatex: true
+        extra_fonts: ./fonts/*.ttf
+    - uses: softprops/action-gh-release@v1

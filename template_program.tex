@@ -1,37 +1,15 @@
-% Класс документа, кегль по умолчанию
-\documentclass[12pt]{article}
+{% extends "template_base.tex" %}
 
-% Поля, размер и ориентация страницы
-\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2cm, right=2cm]{geometry}
+{% block header %}
+% Класс документа, кегль по умолчанию, две колонки текста
+\documentclass[12pt,twocolumn]{article}
+{% endblock %}
 
-% Пакет дополнительных возможностей
-\usepackage{xltxtra}
-
-% Поддержка различных языков
-\usepackage{polyglossia}
-
-% Выбор основного шрифта
-\setmainfont{Times New Roman}
-
-% Шрифт для кириллицы
-\newfontfamily\cyrillicfont[Mapping=tex-text,Script=Cyrillic]{Times New Roman}
-
-% Основной язык текста
-\setdefaultlanguage{russian}
-
-% Полуторный интервал
-\linespread{1.25}
-
-% Не останавливать компиляцию
-\scrollmode
-
-% Без номеров страниц
-\pagestyle{empty}
-
+{% block document %}
 \begin{document}
 
 \begin{center} \Large
-Экзаменационные вопросы по предмету \\ {{data.subject}}
+Экзаменационные вопросы по предмету \\ {{ data.subject }}
 \end{center}
 
 % Тут надо вставить текст до вопросов
@@ -45,3 +23,4 @@
 % Тут можно вставить текст после после вопросов
 
 \end{document}
+{% endblock %}

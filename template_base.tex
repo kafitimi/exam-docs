@@ -1,0 +1,58 @@
+{% block header %}{% endblock %}
+
+% Поля, размер и ориентация страницы
+\usepackage[a4paper,landscape,top=2.5cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
+
+% Пакет дополнительных возможностей
+\usepackage{xltxtra}
+
+% Поддержка различных языков
+\usepackage{polyglossia}
+
+% Выбор основного шрифта
+\setmainfont{Times New Roman}
+
+% Шрифт для кириллицы
+\newfontfamily\cyrillicfont[Mapping=tex-text,Script=Cyrillic]{Times New Roman}
+
+% Основной язык текста
+\setdefaultlanguage{russian}
+
+% Интервал между колонками
+\setlength{\columnsep}{2cm}
+
+% Полуторный интервал
+\linespread{1.25}
+
+% Не останавливать компиляцию
+\scrollmode
+
+% Без номеров страниц
+\pagestyle{empty}
+
+% Шаблон шапки билета
+\newcommand{\bilet}[1]{
+  \newpage
+  \begin{flushleft}
+    \begin{small}
+      Северо-Восточный федеральный университет\\
+      Институт математики и информатики \\
+      Кафедра <<Информационные технологии>> \\
+      Дисциплина: {{ data.subject }} \\
+      Группа: {{ data.group }}
+    \end{small}
+  \end{flushleft}
+
+  \begin{flushright}
+    <<УТВЕРЖДАЮ>> \\
+    Зав.кафедрой \\
+    \underline{\hspace{3cm}} \\
+    Николаева Н.В. \\
+  \end{flushright}
+
+  \begin{center}
+    БИЛЕТ № #1
+  \end{center}
+}
+
+{% block document %}{% endblock %}

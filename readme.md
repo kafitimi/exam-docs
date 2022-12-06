@@ -22,6 +22,7 @@
 
 **Ссылки для разработчика**
 
-* [LaTeX.Online](https://latexonline.cc/)
 * [GitHub Action Checkout](https://github.com/marketplace/actions/checkout)
+* [GitHub Action Setup Python](https://github.com/marketplace/actions/setup-python)
+* [GitHub Action for Latex](https://github.com/marketplace/actions/github-action-for-latex)
 * [GitHub Action GH Release](https://github.com/marketplace/actions/gh-release)
