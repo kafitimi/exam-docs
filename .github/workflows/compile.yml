@@ -1,0 +1,9 @@
+name: Compile exam documents
+on: [push]
+jobs:
+  compile:
+    name: Compilation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: pip install -r requirements
