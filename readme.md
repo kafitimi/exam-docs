@@ -8,6 +8,7 @@
 * файл c данными по вопросам экзамена (data.yaml)
 * файл шаблона для билетов экзамена (template_assignments.tex)
 * файл шаблона для программы экзамена (template_program.tex)
+* общий файл шаблона (template_base.tex)
 
 После коммита GitHub Action должен сгенерировать в разделе Releases файлы pdf:
 
