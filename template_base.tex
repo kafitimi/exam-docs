@@ -30,29 +30,4 @@
 % Без номеров страниц
 \pagestyle{empty}
 
-% Шаблон шапки билета
-\newcommand{\bilet}[1]{
-  \newpage
-  \begin{flushleft}
-    \begin{small}
-      Северо-Восточный федеральный университет\\
-      Институт математики и информатики \\
-      Кафедра <<Информационные технологии>> \\
-      Дисциплина: {{ data.subject }} \\
-      Группа: {{ data.group }}
-    \end{small}
-  \end{flushleft}
-
-  \begin{flushright}
-    <<УТВЕРЖДАЮ>> \\
-    Зав.кафедрой \\
-    \underline{\hspace{3cm}} \\
-    Николаева Н.В. \\
-  \end{flushright}
-
-  \begin{center}
-    БИЛЕТ № #1
-  \end{center}
-}
-
 {% block document %}{% endblock %}
