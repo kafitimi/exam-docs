@@ -1,5 +1,8 @@
 name: Compile exam documents
-on: [push]
+on:
+  push:
+    tags:
+      "v*"
 jobs:
   Compilation:
     runs-on: ubuntu-latest
