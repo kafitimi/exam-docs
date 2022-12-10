@@ -5,9 +5,34 @@
 \documentclass[12pt,twocolumn]{article}
 {% endblock %}
 
-{% block document %}
-\begin{document}
+{% block preambula %}
+% Шаблон шапки билета
+\newcommand{\bilet}[1]{
+  \newpage
+  \begin{center}
+    \begin{small}
+      Северо-Восточный федеральный университет\\
+      Институт математики и информатики \\
+      Кафедра <<Информационные технологии>> \\
+      Дисциплина: {{ data.subject }} \\
+      Группа: {{ data.group }}
+    \end{small}
+  \end{center}
 
+  \begin{flushright}
+    <<УТВЕРЖДАЮ>> \\
+    Зав.кафедрой \\
+    \underline{\hspace{3cm}} \\
+    Николаева Н.В. \\
+  \end{flushright}
+
+  \begin{center}
+    БИЛЕТ № #1
+  \end{center}
+}
+{% endblock %}
+
+{% block document %}
 {% for i in range(5) %}
 \bilet{ {{ i }} }
 \begin{enumerate}
@@ -15,6 +40,4 @@
 \item {{ data.questions[1] }}
 \end{enumerate}
 {% endfor %}
-
-\end{document}
 {% endblock %}
