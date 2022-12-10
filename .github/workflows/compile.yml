@@ -21,3 +21,7 @@ jobs:
         latexmk_use_xelatex: true
         extra_fonts: ./fonts/*.ttf
     - uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          assignments.pdf
+          program.pdf
