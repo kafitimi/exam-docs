@@ -10,7 +10,7 @@
 * файл шаблона для программы экзамена (template_program.tex)
 * общий файл шаблона (template_base.tex)
 
-После коммита GitHub Action должен сгенерировать в разделе Releases файлы pdf:
+После создания релиза вида "v*" GitHub Action должен сгенерировать файлы pdf в разделе Releases:
 
 * программы экзамена (program.pdf)
 * экзаменационных билетов (assignments.pdf)
