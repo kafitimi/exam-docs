@@ -60,7 +60,8 @@ def main():
         'subject': data['subject'],
         'group': data['group'],
         'semester': data['semester'],
-        'tickets': tickets
+        'tickets': tickets,
+        'all_questions' : data['questions']
     }
     
     env = Environment(loader=FileSystemLoader("."))
