@@ -33,11 +33,12 @@
 {% endblock %}
 
 {% block document %}
-{% for i in range(5) %}
-\bilet{ {{ i }} }
-\begin{enumerate}
-\item {{ data.questions[0] }}
-\item {{ data.questions[1] }}
-\end{enumerate}
-{% endfor %}
+\foreach \ticket in \data.tickets
+{
+  \bilet{ {{ticket.id}} }
+  \begin{enumerate}
+  \foreach \question in \ticket.questions{
+    \item{{question}}
+  }
+}
 {% endblock %}
