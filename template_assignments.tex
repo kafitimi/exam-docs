@@ -35,10 +35,10 @@
 {% block document %}
 \foreach \ticket in \data.tickets
 {
-  \bilet{ {{ticket.id}} }
+  \bilet{ {{\ticket.id}} }
   \begin{enumerate}
   \foreach \question in \ticket.questions{
-    \item{{question}}
+    \item{{\question}}
   }
 }
 {% endblock %}
