@@ -66,7 +66,7 @@ def main():
     env = Environment(loader=FileSystemLoader("."))
     for name in names:
         template = env.get_template(f"template_{name}.tex")
-        template.stream(data=data).dump(f"{name}.tex", encoding="utf-8")
+        template.stream(data=template_data).dump(f"{name}.tex", encoding="utf-8")
 
 
 if __name__ == '__main__':
