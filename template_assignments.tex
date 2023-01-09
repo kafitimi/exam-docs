@@ -33,12 +33,12 @@
 {% endblock %}
 
 {% block document %}
-\foreach \ticket in \data.tickets
-{
-  \bilet{ {{\ticket.id}} }
+{%for ticket in data.tickets %}
+  \bilet{ {{ticket.id}} }
   \begin{enumerate}
-  \foreach \question in \ticket.questions{
-    \item{{\question}}
-  }
-}
+  {%for question in ticket.questions %}
+    \item{{question}}
+  {%endfor}
+  \end{enumerate}
+{%endfor}
 {% endblock %}
