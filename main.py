@@ -3,11 +3,13 @@ import random
 from jinja2 import Environment, FileSystemLoader
 from yaml import Loader, load
 
-ticket_counter = 0
-remaining_questions = list()
-
 
 def validate_data(k: int, t: int, n: int) -> None:
+    """Проверка входных данных
+    :param k: количество вопросов в билете
+    :param t: количество билетов
+    :param n: количество вопросов в банке
+    """
     if k * t != n:
         raise Exception(
             "Несочетающееся количество вопросов!\n"
@@ -30,18 +32,19 @@ class Ticket():
         return self.__repr__()
 
 
-def create_ticket(questions: list):
-    global ticket_counter
-    ticket_counter += 1
-    ticket = Ticket(ticket_counter, questions)
-    return ticket
-
-
-def pick_random_questions(amount: int):
-    global remaining_questions
-    choices = random.sample(remaining_questions, k=amount)
-    remaining_questions = list(set(remaining_questions) - set(choices))
-    return choices
+def create_tickets(k: int, t: int, questions: list[str]) -> list[Ticket]:
+    """Создание билетов
+    :param k: количество вопросов в билете
+    :param t: количество билетов
+    :param questions: банк вопросов
+    """
+    # Перемешиваем вопросы в банке
+    random.shuffle(questions)
+    # Нарезаем вопросы на билеты
+    return [
+        Ticket(i + 1, questions[i * k: (i + 1) * k])
+        for i in range(t)
+    ]
 
 
 def main() -> None:
@@ -53,18 +56,11 @@ def main() -> None:
     n = len(data["questions"])
     validate_data(k, t, n)
 
-    global remaining_questions
-
-    remaining_questions = data['questions']
-    tickets = [
-        create_ticket(pick_random_questions(data['questions_count_per_ticket']))
-        for _ in range(data['tickets_count'])
-    ]
     template_data = {
         'subject': data['subject'],
         'group': data['group'],
         'semester': data['semester'],
-        'tickets': tickets,
+        'tickets': create_tickets(k, t, data["questions"]),
         'all_questions': data['questions']
     }
 
