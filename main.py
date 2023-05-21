@@ -1,6 +1,7 @@
-from yaml import load, Loader
-from jinja2 import Environment, FileSystemLoader
 import random
+
+from jinja2 import Environment, FileSystemLoader
+from yaml import Loader, load
 
 ticket_counter = 0
 remaining_questions = list()
@@ -20,7 +21,7 @@ class Questions_amount_per_ticket_is_wrong(Exception):
                          f'{questions_size} % {qcpt_mul_tc} !=0')
 
 
-def check_data_validity(data: dict):
+def validate_data(data: dict) -> None:
     if len(data['questions']) % data['questions_count_per_ticket'] != 0:
         raise Questions_amount_per_ticket_is_wrong(len(data['questions']), data['questions_count_per_ticket'])
     if len(data['questions']) != data['questions_count_per_ticket'] * data['tickets_count']:
@@ -28,23 +29,21 @@ def check_data_validity(data: dict):
 
 
 class Ticket():
-    def __init__(self):
-        self.id = 0
-        self.questions = list()
+    def __init__(self, _id: int, _questions: list[str]) -> None:
+        self.id = _id
+        self.questions = _questions.copy()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'\'id\': {self.id}, \'questions\': {self.questions}'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.__repr__()
 
 
 def create_ticket(questions: list):
     global ticket_counter
-    ticket = Ticket()
-    ticket.id = ticket_counter + 1
     ticket_counter += 1
-    ticket.questions = questions
+    ticket = Ticket(ticket_counter, questions)
     return ticket
 
 
@@ -56,12 +55,10 @@ def pick_random_questions(amount: int):
 
 
 def main():
-    names = ("assignments", "program")
-
     with open("data.yaml", encoding="utf-8") as f:
         data = load(f, Loader=Loader)
 
-    check_data_validity(data)
+    validate_data(data)
 
     global remaining_questions
 
@@ -79,9 +76,10 @@ def main():
     }
 
     env = Environment(loader=FileSystemLoader("."))
-    for name in names:
+    for name in ("assignments", "program"):
         template = env.get_template(f"template_{name}.tex")
-        template.stream(data=template_data).dump(f"{name}.tex", encoding="utf-8")
+        template_stream = template.stream(data=template_data)
+        template_stream.dump(f"{name}.tex", encoding="utf-8")
 
 
 if __name__ == '__main__':
