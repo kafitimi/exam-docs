@@ -14,8 +14,8 @@
 % Тут надо вставить текст до вопросов
 
 \begin{enumerate}
-{% for question in data.questions %}
-\item {{question}}
+{% for question in data.all_questions %}
+    \item {{question}}
 {% endfor %}
 \end{enumerate}
 
