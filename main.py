@@ -7,25 +7,15 @@ ticket_counter = 0
 remaining_questions = list()
 
 
-class Questions_count_wrong(Exception):
-    def __init__(self, questions_size, count_per_ticket):
-        super().__init__('multiplication of questions count per ticket and '
-                         'tickets count must be equal size of question list\n'
-                         f'{questions_size} != {count_per_ticket}')
-
-
-class Questions_amount_per_ticket_is_wrong(Exception):
-    def __init__(self, questions_size, qcpt_mul_tc):
-        super().__init__('modulo divide of count of questions and questions '
-                         'count per ticket must be  should be 0\n'
-                         f'{questions_size} % {qcpt_mul_tc} !=0')
-
-
-def validate_data(data: dict) -> None:
-    if len(data['questions']) % data['questions_count_per_ticket'] != 0:
-        raise Questions_amount_per_ticket_is_wrong(len(data['questions']), data['questions_count_per_ticket'])
-    if len(data['questions']) != data['questions_count_per_ticket'] * data['tickets_count']:
-        raise Questions_count_wrong(len(data['questions']), data['questions_count_per_ticket'] * data['tickets_count'])
+def validate_data(k: int, t: int, n: int) -> None:
+    if k * t != n:
+        raise Exception(
+            "Несочетающееся количество вопросов!\n"
+            f"Количество вопросов в билете: {k}\n"
+            f"Количество билетов: {t}\n"
+            f"Общее количество вопросов: {n}\n"
+            f"{k} * {t} != {n}"
+        )
 
 
 class Ticket():
@@ -54,11 +44,14 @@ def pick_random_questions(amount: int):
     return choices
 
 
-def main():
+def main() -> None:
     with open("data.yaml", encoding="utf-8") as f:
         data = load(f, Loader=Loader)
 
-    validate_data(data)
+    k: int = data["questions_count_per_ticket"]
+    t: int = data["tickets_count"]
+    n = len(data["questions"])
+    validate_data(k, t, n)
 
     global remaining_questions
 
