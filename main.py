@@ -58,8 +58,10 @@ def main() -> None:
 
     template_data = {
         'subject': data['subject'],
-        'group': data['group'],
         'semester': data['semester'],
+        'direction': data['direction'],
+        'profile': data['profile'],
+        'date': data['date'],
         'tickets': create_tickets(k, t, data["questions"]),
         'all_questions': data['questions']
     }
